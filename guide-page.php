@@ -5,15 +5,14 @@
     <div class="banner-overlay"></div>
     <div class="container">
       <div class="text-center banner-title">
-        <h1>Ada Yang Bisa Kami Bantu?</h1>
+        <h1>Kembangkan Bisnis Anda Di Tokopedia</h1>
         <p>Cari tau bagaimana cara berjualan cerdas dengan menggunakan tokopedia</p>
-      </div>
-      <div class="search-box">
-        <div class="search-box-group">
-          <input type="text" class="search-form" placeholder="Cari Tau Cara Berjualan Di Tokopedia">
-          <button type="submit" class="search-form-submit"></button>
+        <div class="btn-group" role="group" aria-label="...">
+        <a href="" class="btn btn-lg btn-success">Pengguna Baru</a>
+        <a href="" class="btn btn-lg btn-orange">Pengguna Lama</a>
         </div>
       </div>
+      
 
     </div>
 
@@ -118,15 +117,22 @@
   <!-- End Hot Topics -->
   <!-- Related Guide -->
   <div class="container">
+     <h4 class='related-title'>Artikel Terkait</h4>
       <div class="related-guide">
-        <h3>Artikel Terkait</h3>
+       
         <div class="row">
           <div class="col-md-6">
             <ul class="related-list">
-              <li><a href="">Cara Memposting Produk Di Tokopedia</a></li>
+              <li><a href=""><i class="fa fa-file-text-o" aria-hidden="true"></i> Cara Memposting Produk Di Tokopedia</a></li>
+              <li><a href=""><i class="fa fa-file-text-o" aria-hidden="true"></i> Cara Membuat Foto Produk Anda Menarik</a></li>
             </ul>
           </div>
-          <div class="col-md-6"></div>
+          <div class="col-md-6">
+            <ul class="related-list">
+              <li><a href=""><i class="fa fa-file-text-o" aria-hidden="true"></i> Cara Memposting Produk Di Tokopedia</a></li>
+              <li><a href=""><i class="fa fa-file-text-o" aria-hidden="true"></i> Cara Membuat Foto Produk Anda Menarik</a></li>
+            </ul>
+          </div>
         </div>
       </div>
   </div>
