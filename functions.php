@@ -133,7 +133,14 @@ add_filter( 'excerpt_more', 'wpdocs_excerpt_more' );
 
 add_filter('pre_get_posts','SearchFilter');
 
-
+function print_meta($metaname){
+	global $post;
+	echo get_post_meta($post->ID,$metaname, true);
+}
+function gets_meta($metaname){
+	global $post;
+	return get_post_meta($post->ID,$metaname, true);
+}
 /*----------------
 Creating Theme Option
 ----------------*/
@@ -149,19 +156,14 @@ function sc_options_menu(){
 
 }
 
-function print_meta($metaname){
-	global $post;
-	echo get_post_meta($post->ID,$metaname, true);
-}
-function gets_meta($metaname){
-	global $post;
-	return get_post_meta($post->ID,$metaname, true);
-}
-
 //registering options setting
 function sc_option_setting(){
 	register_setting('sc_options_group','front_category');
-	register_setting('sc_options_group','category_list');
+	register_setting('sc_options_group','category_branding');
+	register_setting('sc_options_group','category_marketing');
+	register_setting('sc_options_group','category_management');
+	register_setting('sc_options_group','category_keuangan');
+	register_setting('sc_options_group','category_fotografi');
 	register_setting('sc_options_group','header_logo');
 }
 
@@ -205,12 +207,67 @@ function sc_options_page(){
 		
 		?>
 			<div class="form-group">
-				<label for="">Pilih Kategori Posting</label>
-				<select name="category_list" id="" class="form-input">
+				<label for="">Pilih Kategori Branding</label>
+				<select name="category_branding" id="" class="form-input">
 				
 				<?php foreach($categories as $category){ ?>
 				
-				<option value="<?php echo $category->cat_ID ?>" <?php if(get_option('category_list')==$category->cat_ID){echo "selected";}?>><?php echo $category->name;?></option>
+				<option value="<?php echo $category->cat_ID ?>" <?php if(get_option('category_branding')==$category->cat_ID){echo "selected";}?>><?php echo $category->name;?></option>
+				
+				<?php }?>
+			</select>
+			</div>
+			<div class="form-group">
+				<label for="">Pilih Kategori Marketing</label>
+				<select name="category_marketing" id="" class="form-input">
+				
+				<?php foreach($categories as $category){ ?>
+				
+				<option value="<?php echo $category->cat_ID ?>" <?php if(get_option('category_marketing')==$category->cat_ID){echo "selected";}?>><?php echo $category->name;?></option>
+				
+				<?php }?>
+			</select>
+			</div>
+			<div class="form-group">
+				<label for="">Pilih Kategori Management</label>
+				<select name="category_management" id="" class="form-input">
+				
+				<?php foreach($categories as $category){ ?>
+				
+				<option value="<?php echo $category->cat_ID ?>" <?php if(get_option('category_management')==$category->cat_ID){echo "selected";}?>><?php echo $category->name;?></option>
+				
+				<?php }?>
+			</select>
+			</div>
+			<div class="form-group">
+				<label for="">Pilih Kategori Keuangan</label>
+				<select name="category_keuangan" id="" class="form-input">
+				
+				<?php foreach($categories as $category){ ?>
+				
+				<option value="<?php echo $category->cat_ID ?>" <?php if(get_option('category_keuangan')==$category->cat_ID){echo "selected";}?>><?php echo $category->name;?></option>
+				
+				<?php }?>
+			</select>
+			</div>
+			<div class="form-group">
+				<label for="">Pilih Kategori Keuangan</label>
+				<select name="category_keuangan" id="" class="form-input">
+				
+				<?php foreach($categories as $category){ ?>
+				
+				<option value="<?php echo $category->cat_ID ?>" <?php if(get_option('category_keuangan')==$category->cat_ID){echo "selected";}?>><?php echo $category->name;?></option>
+				
+				<?php }?>
+			</select>
+			</div>
+				<div class="form-group">
+				<label for="">Pilih Kategori Fotografi</label>
+				<select name="category_fotografi" id="" class="form-input">
+				
+				<?php foreach($categories as $category){ ?>
+				
+				<option value="<?php echo $category->cat_ID ?>" <?php if(get_option('category_fotografi')==$category->cat_ID){echo "selected";}?>><?php echo $category->name;?></option>
 				
 				<?php }?>
 			</select>
