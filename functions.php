@@ -58,7 +58,7 @@ wp_enqueue_style('generaltokopedia',get_template_directory_uri().'/css/general.c
 wp_enqueue_script( 'bootstrapjs', get_template_directory_uri() . '/js/bootstrap.min.js', array( 'jquery' ), '20150330', true );
 //adding calendar css
 	
-	if(is_page('guide-page')){
+	if(is_page('guide')){
 		wp_enqueue_style('swipercss',get_template_directory_uri().'/css/swiper.min.css');
 		wp_enqueue_script('swiperjs',get_template_directory_uri().'/js/swiper.min.js', array( 'jquery' ), '20150330', true );
 	}
@@ -66,7 +66,7 @@ wp_enqueue_script( 'bootstrapjs', get_template_directory_uri() . '/js/bootstrap.
 	wp_enqueue_style('calendarcss',get_template_directory_uri().'/css/monthly.css');
 	wp_enqueue_script('calendarjs',get_template_directory_uri().'/js/monthly.js', array( 'jquery' ), '20150330', true );
 }
-	
+	wp_enqueue_style('font-awesome','https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 	//adding style.css to wordpress
 wp_enqueue_style('generalcss',get_stylesheet_uri());
 
@@ -489,5 +489,87 @@ function selleroftheweek() {
     )
   );
 }
+add_action( 'init', 'sellerguide' );
+function sellerguide(){
+	register_post_type( 'sellerguide',
+    array(
+      'labels' => array(
+        'name' => __( 'Seller Guide' ),
+        'singular_name' => __( 'Seller Guide' )
+      ),
+      'public' => true,
+      'has_archive' => true,
+      	'menu_icon'=>'dashicons-welcome-learn-more',
+		'supports'            => array( 'title', 'editor', 'thumbnail', 'comments', 'revisions',  )
+    )
+  );
+}
+
+//adding guide category metaboxes
+add_action('add_meta_boxes','guide_metabox');
+function guide_metabox(){
+	add_meta_box('guide_cateogry','Kategori Terkait','guide_category','sellerguide','side','high');
+
+}
+function guide_category($post){
+	$value=get_post_custom($post->ID);
+	$guide_cat= isset($value['guide_cat']) ? esc_attr($value['guide_cat'][0]) : '';
+	 wp_nonce_field('guide_meta_box_nonce', 'meta_box_nonce');
+	 
+	 ?>
+	 		<?php 
+		$args=array(
+		'orderby'=>'name',
+			'order'=>'ASC'
+		);
+													 $categories=get_categories($args);
+
+		
+		?>
+	 <style>
+		.form-group label {
+			margin-bottom: 5px;
+		}
+		
+		.form-post {
+			width: 100%;
+			padding: 10px;
+			border-radius: 3px;
+			margin: 0;
+		}
+	</style>
+		<div class="form-group">
+		<label for="guide_cat">Pilih Kategori</label>
+	<select name="guide_cat" id="" class="form-input">
+				
+				<?php foreach($categories as $category){ ?>
+				
+				<option value="<?php echo $category->cat_ID ?>" <?php if($guide_cat==$category->cat_ID){echo "selected";}?>><?php echo $category->name;?></option>
+				
+				<?php }?>
+			</select>
+	</div>
+	 
+	 <?php 
+}
+add_action('save_post','guide_save');
+function guide_save($post_id){
+	        // Bail if we're doing an auto save
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+        return;
+
+    // if our nonce isn't there, or we can't verify it, bail
+    if (!isset($_POST['meta_box_nonce']) || !wp_verify_nonce($_POST['meta_box_nonce'], 'guide_meta_box_nonce'))
+        return;
+
+    // if our current user can't edit this post, bail
+    if (!current_user_can('edit_post'))
+        return;
+        if (isset($_POST['guide_cat'])) {
+        update_post_meta($post_id, 'guide_cat', $_POST['guide_cat']);
+    }
+
+}
+
 
 ?>
