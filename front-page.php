@@ -163,13 +163,16 @@ fclose($eventfile);
         </div>
         <div class="col-md-6">
           <h3>Seller Of The Week</h3>
+          <?php $sotws=new WP_Query(array('post_type'=>'sotw','posts_per_page'=>'1'));
+          if($sotws->have_posts()):while($sotws->have_posts()):$sotws->the_post();
+          ?>
           <div class="sotm-box">
             <div class="sotm-picture">
-              <img src="<?php images('vileo-background.jpg');?>" alt="" class="img-responsive">
+              <img src="<?php echo feature_img_url($post->ID,'full');?>" alt="" class="img-responsive">
             </div>
             <div class="sotm-description">
-              <h4>Agung Yoela Nugraha</h4>
-              <p>Dengan kegigihannya membangun bisnis kerajinan tangannya, kini bisnisnya terlahir besar dan dengan kesenangannya untuk sharing kepada sesama. Kami menobatkan seller ini untuk menjadi seller of the month.</p>
+              <h4><?php the_title();?></h4>
+              <?php the_excerpt();?>
               
               <div class="clearfix">
               <div class="pull-right">
@@ -179,6 +182,7 @@ fclose($eventfile);
               
             </div>
           </div>
+          <?php endwhile;endif;?>
         </div>
       </div>
     </div>
