@@ -55,8 +55,9 @@
       
     </div>
     <div class="post-comments">
+       <?php if(gets_meta('sellername') && gets_meta('communityname') && gets_meta('authordesc')): ?>
       <div class="post-author">
-        
+       
         
       <h5>SATU IDE DARI <?php print_meta('sellername');?></h5>
          <div class="author-community">
@@ -64,6 +65,9 @@
         </div>
         <p><?php print_meta('authordesc');?></p>
       </div>
+      <?php endif;?>
+      
+      
     <?php comments_template();?>
     </div>
   </div>

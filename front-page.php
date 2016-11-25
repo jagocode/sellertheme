@@ -36,25 +36,28 @@ fclose($eventfile);
 ?>
 <?php /* Template Name: Front Page */ ?>
 <?php get_header();?>
-  <!-- Banner -->
-  <div class="banner">
-    <div class="banner-overlay"></div>
+   <!-- Head Guide -->
+  <div class="head-guide">
     <div class="container">
-      <div class="text-center banner-title">
-        <h1>Ada Yang Bisa Kami Bantu?</h1>
-        <p>Cari tau bagaimana cara berjualan cerdas dengan menggunakan tokopedia</p>
-      </div>
-      <div class="search-box">
-        <div class="search-box-group">
-          <input type="text" class="search-form" placeholder="Cari Tau Cara Berjualan Di Tokopedia">
-          <button type="submit" class="search-form-submit"></button>
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Saya Ingin Memulai Berjualan Di Tokopedia</h2>
+          <p>Temukan panduan bagaimana cara yang tepat berjualan di tokopedia.com</p>
+          <a href="" class="btn btn-outline">Lihat Panduan</a>
+        </div>
+        <div class="col-md-4">
+          <img src="<?php echo get_template_directory_uri().'/images/topedshop.png';?>" width="100%"></img>
+          
+        </div>
+        <div class="col-md-4">
+          <h2 class="text-right">Saya Ingin Meningkatkan Penjualan Di Tokopedia</h2>
+          <p class="text-right">Temukan panduan bagaimana meningkatkan penjualan di tokopedia.com</p>
+          <a href="" class="btn btn-outline pull-right">Lihat Panduan</a>
         </div>
       </div>
-
     </div>
-
   </div>
-  <!-- End Banner -->
+  <!-- End Head Guide -->
   <!-- Hot Topics -->
   <div class="hot-topics">
     <div class="container">
@@ -176,7 +179,7 @@ fclose($eventfile);
               
               <div class="clearfix">
               <div class="pull-right">
-                <a href="" class="btn btn-success btn-lg">Cek Tokonya Yuk!</a>
+                <a href="" class="">Cek Siapa Saja Yang Menjadi Seller Of The Week</a>
                 </div>
               </div>
               

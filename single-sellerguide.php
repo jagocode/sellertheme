@@ -28,7 +28,7 @@
 
   <div class="container">
   <!-- Nav tabs -->
-        <!-- Guide -->
+    <!-- Guide -->
 <div class="guide">
   <h4>Panduan Menjadi Seller Tokopedia</h4>
     <!-- Swiper -->
@@ -54,25 +54,22 @@
 
 <!-- Guide Feature -->
 <div class="container">
-  
+  <?php if(have_posts()):while(have_posts()):the_post();?>
   <div class="guide-feature">
     <div class="row">
       <div class="col-md-6">
-        <img src="https://seller.tokopedia.com/wp-content/uploads/2016/05/mengapa-bisnis-eksistensi-online.jpg" class="img-responsive"></img>
+        <img src="<?php echo feature_img_url($post->ID,'full')?>" class="img-responsive"></img>
       </div>
       <div class="col-md-6">
         <div class="guide-feature-content">
-           <h1>Kenapa Berjualan Di Tokopedia?</h1>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-        sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-        magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-        quis nostrud exerci tation ullamcorper suscipit lobortis nisl
-        ut aliquip ex ea commodo consequat. </p>
+           <h1><?php the_title();?></h1>
+           <?php the_content();?>
         </div>
        
       </div>
     </div>
 </div>
+<?php endwhile;endif;?>
 </div>
 
 <!-- End Guide Feature -->
@@ -82,7 +79,7 @@
       
       <div class="row">
         <?php 
-        $artikel=new WP_Query('posts_per_page=3');
+        $artikel=new WP_Query('posts_per_page=100&cat='.gets_meta('guide_cat'));
         if($artikel->have_posts()):while($artikel->have_posts()):$artikel->the_post();
         $feature=feature_img_url($post->ID,'full');
         ?>
@@ -105,23 +102,36 @@
 
 
 
-        <div class="col-md-3">
-          <div class="box-grid">
-            <div class="text-center">
-              <div class="more-topics">
-                <img src="<?php images('newspaper.png');?>" alt="">
-                <h4><a href="">Lihat Topic Lainnya</a></h4>
-              </div>
 
-            </div>
-          </div>
-        </div>
 
       </div>
     </div>
   </div>
   <!-- End Hot Topics -->
- 
+  <!-- Related Guide -->
+  <div class="container">
+     <h4 class='related-title'>Artikel Terkait</h4>
+      <div class="related-guide">
+       
+        <div class="row">
+          <div class="col-md-6">
+            <ul class="related-list">
+              <li><a href=""><i class="fa fa-file-text-o" aria-hidden="true"></i> Cara Memposting Produk Di Tokopedia</a></li>
+              <li><a href=""><i class="fa fa-file-text-o" aria-hidden="true"></i> Cara Membuat Foto Produk Anda Menarik</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul class="related-list">
+              <li><a href=""><i class="fa fa-file-text-o" aria-hidden="true"></i> Cara Memposting Produk Di Tokopedia</a></li>
+              <li><a href=""><i class="fa fa-file-text-o" aria-hidden="true"></i> Cara Membuat Foto Produk Anda Menarik</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  </div>
+  
+  <!-- End Related Guide -->
+
 
 
 

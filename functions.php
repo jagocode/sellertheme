@@ -62,6 +62,10 @@ wp_enqueue_script( 'bootstrapjs', get_template_directory_uri() . '/js/bootstrap.
 		wp_enqueue_style('swipercss',get_template_directory_uri().'/css/swiper.min.css');
 		wp_enqueue_script('swiperjs',get_template_directory_uri().'/js/swiper.min.js', array( 'jquery' ), '20150330', true );
 	}
+	if( is_single() && get_post_type()=='sellerguide' ){
+       	wp_enqueue_style('swipercss',get_template_directory_uri().'/css/swiper.min.css');
+		wp_enqueue_script('swiperjs',get_template_directory_uri().'/js/swiper.min.js', array( 'jquery' ), '20150330', true );
+    }
 	if(is_front_page()){
 	wp_enqueue_style('calendarcss',get_template_directory_uri().'/css/monthly.css');
 	wp_enqueue_script('calendarjs',get_template_directory_uri().'/js/monthly.js', array( 'jquery' ), '20150330', true );
@@ -118,7 +122,7 @@ return $query;
 
 //customize the excerpt lenght
 function wpdocs_custom_excerpt_length( $length ) {
-    return 10;
+    return 8;
 }
 
 add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );
@@ -628,5 +632,59 @@ function guide_save($post_id){
 
 }
 
+
+/*-----------------
+Pagination 
+----------------*/
+
+// numbered pagination
+function sc_pagination($pages = '', $range = 4)
+{  
+     $showitems = ($range * 2)+1;  
+ 
+     global $paged;
+     if(empty($paged)) $paged = 1;
+ 
+     if($pages == '')
+     {
+         global $wp_query;
+         $pages = $wp_query->max_num_pages;
+         if(!$pages)
+         {
+             $pages = 1;
+         }
+     }   
+ 
+     if(1 != $pages)
+     {
+         echo "<div class=\"pagination\"><span>Page ".$paged." of ".$pages."</span>";
+         if($paged > 2 && $paged > $range+1 && $showitems < $pages) echo "<a href='".get_pagenum_link(1)."'>&laquo; First</a>";
+         if($paged > 1 && $showitems < $pages) echo "<a href='".get_pagenum_link($paged - 1)."'>&lsaquo; Previous</a>";
+ 
+         for ($i=1; $i <= $pages; $i++)
+         {
+             if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems ))
+             {
+                 echo ($paged == $i)? "<span class=\"current\">".$i."</span>":"<a href='".get_pagenum_link($i)."' class=\"inactive\">".$i."</a>";
+             }
+         }
+ 
+         if ($paged < $pages && $showitems < $pages) echo "<a href=\"".get_pagenum_link($paged + 1)."\">Next &rsaquo;</a>";  
+         if ($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) echo "<a href='".get_pagenum_link($pages)."'>Last &raquo;</a>";
+         echo "</div>\n";
+     }
+}
+
+function my_post_queries( $query ) {
+    // not an admin page and it is the main query
+    if (!is_admin() && $query->is_main_query()){
+
+        if(is_tax()){
+            // show 30 posts on custom taxonomy pages
+            $query->set('posts_per_page', 30);
+        }
+    }
+}
+add_action( 'pre_get_posts', 'my_post_queries' );
 
 ?>
